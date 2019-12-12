@@ -7,6 +7,7 @@ namespace TestAverage
     {
         static void Main(string[] args)
         {
+
             Console.WriteLine("How many tests do you need to average?");
             var totalAmountOfTests = int.Parse(Console.ReadLine());
             Console.Clear();
@@ -26,15 +27,40 @@ namespace TestAverage
                 sum += num;
             }
 
-            int average = sum / totalAmountOfTests;
+            var instanceOfAverage = new Average();
+            int average = instanceOfAverage.GetAverage(sum, totalAmountOfTests);
+
             Console.WriteLine($"You entered {totalAmountOfTests} tests." +
-                $" The average score of all of those tests is : {average}.");
+                $" The average score of all of those tests is: {average}.");
 
             Console.ReadLine();
             Console.Clear();
+
+            Question();
+
+        }
+
+        public static void Question()
+        {
             Console.WriteLine("Would you like to average more tests? Y/N?");
-            Console.ReadLine();
-           
+
+            switch (Console.ReadLine().ToUpper())
+            {
+                case "Y":
+                    Console.Clear();
+                    Main(new string[] { });
+                    break;
+                case "N":
+                    Console.Clear();
+                    Console.WriteLine("bye bye");
+                    break;
+                default:
+                    Console.Clear();
+                    Console.WriteLine("Input must be either Y/N");
+                    Question();
+                    break;
+            }
         }
     }
 }
+
